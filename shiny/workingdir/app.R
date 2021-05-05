@@ -24,25 +24,33 @@ library(shiny) # load the shiny package
 #  })
 #} # Specifies the behaviour of our app by defining a server function. \
 # It's currently empty, so our app doesn't do anything,but we'll be back to revisit this shortly
-ui <- fluidPage(
-  textInput("name", "What's your name?"),
-  numericInput("age", "How old are you?", value = NA),
-  textOutput("greeting")
-)
+#ui <- fluidPage(
+#  textInput("name", "What's your name?"),
+#  numericInput("age", "How old are you?", value = NA),
+    # textOutput("greeting")
+# )
 
-server <- function(input, output, session) {
-  output$greeting <- renderText({
-    paste0("Hello ", input$name)
-  })
-}
+# server <- function(input, output, session) {
+  # output$greeting <- renderText({
+    # paste0("Hello ", input$name)
+  # })
+# }
 #tableOutput("mortgage")
 #output$greeting <- renderText({
 #  paste0("Hello ", input$name)
 #})
-#numericInput("age", "How old are you?", value = NA)
-#textInput("name", "What's your name?")
-#textOutput("greeting")
-#output$histogram <- renderPlot({
-#  hist(rnorm(1000))
-#}, res = 96)
+
+ui <- fluidPage(
+  sliderInput("x", label = "If x is", min = 1, max = 50, value = 30),
+  "then x times 5 is",
+  textOutput("product")
+)
+
+server <- function(input, output, session) {
+  output$product <- renderText({ 
+    input$x * 5
+  })
+}
+
+shinyApp(ui, server)
 shinyApp(ui, server) # Construct and start a shiny application from UI and server
