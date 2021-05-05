@@ -54,31 +54,51 @@ library(shiny) # load the shiny package
 # }
 
 
+# ui <- fluidPage(
+#   sliderInput("x", "If x is", min = 1, max = 50, value = 30),
+#   sliderInput("y", "and y is", min = 1, max = 50, value = 5),
+#   "then, (x * y) is",
+#   textOutput("product"),
+#   "and, (x * y) + 5 is",
+#   textOutput("product_plus5"),
+#   "and (x * y) + 10 is",
+#   textOutput("product_plus10")
+# )
+# 
+# server <- function(input, output, session) {
+#   # Create a product reactive expression
+#   pdt_exp <- reactive({
+#     input$x * input$y
+#   })
+#   output$product <- renderText({ 
+#     pdt_exp()
+#   })
+#   output$product_plus5 <- renderText({ 
+#     pdt_exp() + 5
+#   })
+#   output$product_plus10 <- renderText({ 
+#     pdt_exp() + 10
+#   })
+# 
+library(ggplot2)
+
+datasets <- c("economics", "faithfuld", "seals")
 ui <- fluidPage(
-  sliderInput("x", "If x is", min = 1, max = 50, value = 30),
-  sliderInput("y", "and y is", min = 1, max = 50, value = 5),
-  "then, (x * y) is",
-  textOutput("product"),
-  "and, (x * y) + 5 is",
-  textOutput("product_plus5"),
-  "and (x * y) + 10 is",
-  textOutput("product_plus10")
+  selectInput("dataset", "Dataset", choices = datasets),
+  verbatimTextOutput("summary"),
+  plotOutput("plot")
 )
 
 server <- function(input, output, session) {
-  # Create a product reactive expression
-  pdt_exp <- reactive({
-    input$x * input$y
+  dataset <- reactive({
+    get(input$dataset, "package:ggplot2")
   })
-  output$product <- renderText({ 
-    pdt_exp()
+  output$summary <- renderPrint({
+    summary(dataset())
   })
-  output$product_plus5 <- renderText({ 
-    pdt_exp() + 5
-  })
-  output$product_plus10 <- renderText({ 
-    pdt_exp() + 10
-  })
+  output$plot <- renderPlot({
+    plot(dataset())
+  }, res = 96)
 }
 
 shinyApp(ui, server) # Construct and start a shiny application from UI and server
