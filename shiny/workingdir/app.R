@@ -1,7 +1,9 @@
 ## This is my introduction to developing using shiny app
 library(shiny) # load the shiny package
 ui <- fluidPage(
-  "Hello, world!"
+  selectInput("dataset", label = "Dataset", choices = ls("package:datasets")),
+  verbatimTextOutput("summary"),
+  tableOutput("table")
 ) # Define the user interface, the HTML webpage that humans interact with
 
 server <- function(input, output, session) {
