@@ -7,14 +7,19 @@ ui <- fluidPage(
 ) # Define the user interface, the HTML webpage that humans interact with
 
 server <- function(input, output, session) {
-  output$summary <- renderPrint({
-    dataset <- get(input$dataset, "package:datasets")
-    summary(dataset)
+  # Create a reactive expression
+  dataset <- reactive({
+    get(input$dataset, "package:datasets")
   })
   
+  output$summary <- renderPrint({
+    # Use a reactive expression by calling it like a function
+    summary(dataset())
+  })
+  
+  
   output$table <- renderTable({
-    dataset <- get(input$dataset, "package:datasets")
-    dataset
+    dataset()
   })
 } # Specifies the behaviour of our app by defining a server function. \
 # It's currently empty, so our app doesn't do anything,but we'll be back to revisit this shortly
