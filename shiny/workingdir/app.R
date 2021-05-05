@@ -7,6 +7,15 @@ ui <- fluidPage(
 ) # Define the user interface, the HTML webpage that humans interact with
 
 server <- function(input, output, session) {
+  output$summary <- renderPrint({
+    dataset <- get(input$dataset, "package:datasets")
+    summary(dataset)
+  })
+  
+  output$table <- renderTable({
+    dataset <- get(input$dataset, "package:datasets")
+    dataset
+  })
 } # Specifies the behaviour of our app by defining a server function. \
 # It's currently empty, so our app doesn't do anything,but we'll be back to revisit this shortly
 
