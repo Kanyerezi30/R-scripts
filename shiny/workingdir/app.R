@@ -102,15 +102,15 @@ library(shiny) # load the shiny package
 # }
 
 ### Working with free text
-ui <- fluidPage(
-  textInput("name", "What's your name?", placeholder = "Your name"),
-  passwordInput("password", "What's your password?"),
-  textAreaInput("story", "Tell me about yourself", rows = 3)
-)
-
-server <- function(input, output, session) {
-
-}
+# ui <- fluidPage(
+#   textInput("name", "What's your name?", placeholder = "Your name"),
+#   passwordInput("password", "What's your password?"),
+#   textAreaInput("story", "Tell me about yourself", rows = 3)
+# )
+# 
+# server <- function(input, output, session) {
+# 
+# }
 
 ### Working with numeric inputs
 # ui <- fluidPage(
@@ -120,17 +120,18 @@ server <- function(input, output, session) {
 # )
 # 
 # server <- function(input, output, session){
-#   
+# 
 # }
 
 ### Working with dates
 # ui <- fluidPage(
 #   dateInput("dob", "When were you born?"), # Single date
-#   dateRangeInput("holiday", "When do you want to go on vacation next?") # Range of dates
+#   dateRangeInput("holiday", "When do you want to go on vacation next?"), # Range of dates
+#   
 # )
 # 
 # server <- function(input, output, session) {
-#   
+# 
 # }
 
 ### Limited choices or prespecified values
@@ -166,6 +167,20 @@ server <- function(input, output, session) {
 # server <- function(input, output, session) {
 #   
 # }
+
+### Working with text output
+ui <- fluidPage(
+  textOutput("text"), # output placeholder for regular text
+  verbatimTextOutput("code") # output placeholder for code and console
+)
+server <- function(input, output, session) {
+  output$text <- renderText({ 
+    "Hello friend!" 
+  })
+  output$code <- renderPrint({ 
+    summary(1:10) 
+  })
+}
 
 
 shinyApp(ui, server) # Construct and start a shiny application from UI and server
