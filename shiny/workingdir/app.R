@@ -102,15 +102,15 @@ library(shiny) # load the shiny package
 # }
 
 ### Working with free text
-# ui <- fluidPage(
-#   textInput("name", "What's your name?"),
-#   passwordInput("password", "What's your password?"),
-#   textAreaInput("story", "Tell me about yourself", rows = 3)
-# )
-# 
-# server <- function(input, output, session) {
-#   
-# }
+ui <- fluidPage(
+  textInput("name", "What's your name?", placeholder = "Your name"),
+  passwordInput("password", "What's your password?"),
+  textAreaInput("story", "Tell me about yourself", rows = 3)
+)
+
+server <- function(input, output, session) {
+
+}
 
 ### Working with numeric inputs
 # ui <- fluidPage(
@@ -158,12 +158,14 @@ library(shiny) # load the shiny package
 # }
 
 ### Working with action buttons. Allow a user to do an action
-ui <- fluidPage(
-  actionButton("click", "Click me!"),
-  actionButton("drink", "Drink me!", icon = icon("cocktail"))
-)
+# ui <- fluidPage(
+#   actionButton("click", "Click me!"),
+#   actionButton("drink", "Drink me!", icon = icon("cocktail"))
+# )
+# 
+# server <- function(input, output, session) {
+#   
+# }
 
-server <- function(input, output, session) {
-  
-}
+
 shinyApp(ui, server) # Construct and start a shiny application from UI and server
