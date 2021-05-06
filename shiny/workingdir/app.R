@@ -124,9 +124,24 @@ library(shiny) # load the shiny package
 # }
 
 ### Working with dates
+# ui <- fluidPage(
+#   dateInput("dob", "When were you born?"), # Single date
+#   dateRangeInput("holiday", "When do you want to go on vacation next?") # Range of dates
+# )
+# 
+# server <- function(input, output, session) {
+#   
+# }
+
+### Limited choices or prespecified values
+animals <- c("dog", "cat", "mouse", "bird", "other", "I hate animals")
+
 ui <- fluidPage(
-  dateInput("dob", "When were you born?"), # Single date
-  dateRangeInput("holiday", "When do you want to go on vacation next?") # Range of dates
+  selectInput("state", "What's your favourite state?", state.name, multiple = T),
+  radioButtons("animal", "What's your favourite animal?", choices = animals),
+  checkboxGroupInput("animal", "What animals do you like?", animals), # Allow multiple choices
+  checkboxInput("cleanup", "Clean up?", value = TRUE),
+  checkboxInput("shutdown", "Shutdown?")
 )
 
 server <- function(input, output, session) {
