@@ -149,11 +149,21 @@ library(shiny) # load the shiny package
 # }
 
 ### Working with file uploads
+# ui <- fluidPage(
+#   fileInput("upload", NULL)
+# )
+# 
+# server <- function(input, output, session){
+#   
+# }
+
+### Working with action buttons. Allow a user to do an action
 ui <- fluidPage(
-  fileInput("upload", NULL)
+  actionButton("click", "Click me!"),
+  actionButton("drink", "Drink me!", icon = icon("cocktail"))
 )
 
-server <- function(input, output, session){
+server <- function(input, output, session) {
   
 }
 shinyApp(ui, server) # Construct and start a shiny application from UI and server
