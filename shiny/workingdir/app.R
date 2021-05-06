@@ -183,13 +183,21 @@ library(shiny) # load the shiny package
 # }
 
 ### Working with data frames
+# ui <- fluidPage(
+#   tableOutput("static"), # static tables
+#   dataTableOutput("dynamic") # dynamic tables
+# )
+# server <- function(input, output, session) {
+#   output$static <- renderTable(head(mtcars)) # All rows are displayed
+#   output$dynamic <- renderDataTable(mtcars, options = list(pageLength = 5)) # A specified number of rows is displayed
+# }
+
+### Working with plots
 ui <- fluidPage(
-  tableOutput("static"), # static tables
-  dataTableOutput("dynamic") # dynamic tables
+  plotOutput("plot", width = "400px")
 )
 server <- function(input, output, session) {
-  output$static <- renderTable(head(mtcars)) # All rows are displayed
-  output$dynamic <- renderDataTable(mtcars, options = list(pageLength = 5)) # A specified number of rows is displayed
+  output$plot <- renderPlot(plot(1:5), res = 96)
 }
 
 shinyApp(ui, server) # Construct and start a shiny application from UI and server
