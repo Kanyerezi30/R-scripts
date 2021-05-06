@@ -134,17 +134,26 @@ library(shiny) # load the shiny package
 # }
 
 ### Limited choices or prespecified values
-animals <- c("dog", "cat", "mouse", "bird", "other", "I hate animals")
+# animals <- c("dog", "cat", "mouse", "bird", "other", "I hate animals")
+# 
+# ui <- fluidPage(
+#   selectInput("state", "What's your favourite state?", state.name, multiple = T),
+#   radioButtons("animal", "What's your favourite animal?", choices = animals),
+#   checkboxGroupInput("animal", "What animals do you like?", animals), # Allow multiple choices
+#   checkboxInput("cleanup", "Clean up?", value = TRUE),
+#   checkboxInput("shutdown", "Shutdown?")
+# )
+# 
+# server <- function(input, output, session) {
+#   
+# }
 
+### Working with file uploads
 ui <- fluidPage(
-  selectInput("state", "What's your favourite state?", state.name, multiple = T),
-  radioButtons("animal", "What's your favourite animal?", choices = animals),
-  checkboxGroupInput("animal", "What animals do you like?", animals), # Allow multiple choices
-  checkboxInput("cleanup", "Clean up?", value = TRUE),
-  checkboxInput("shutdown", "Shutdown?")
+  fileInput("upload", NULL)
 )
 
-server <- function(input, output, session) {
+server <- function(input, output, session){
   
 }
 shinyApp(ui, server) # Construct and start a shiny application from UI and server
