@@ -80,25 +80,35 @@ library(shiny) # load the shiny package
 #     pdt_exp() + 10
 #   })
 # 
-library(ggplot2)
+# library(ggplot2)
+# 
+# datasets <- c("economics", "faithfuld", "seals")
+# ui <- fluidPage(
+#   selectInput("dataset", "Dataset", choices = datasets),
+#   verbatimTextOutput("summary"),
+#   plotOutput("plot")
+# )
+# 
+# server <- function(input, output, session) {
+#   dataset <- reactive({
+#     get(input$dataset, "package:ggplot2")
+#   })
+#   output$summary <- renderPrint({
+#     summary(dataset())
+#   })
+#   output$plot <- renderPlot({
+#     plot(dataset())
+#   }, res = 96)
+# }
 
-datasets <- c("economics", "faithfuld", "seals")
+### Working with free text
 ui <- fluidPage(
-  selectInput("dataset", "Dataset", choices = datasets),
-  verbatimTextOutput("summary"),
-  plotOutput("plot")
+  textInput("name", "What's your name?"),
+  passwordInput("password", "What's your password?"),
+  textAreaInput("story", "Tell me about yourself", rows = 3)
 )
 
 server <- function(input, output, session) {
-  dataset <- reactive({
-    get(input$dataset, "package:ggplot2")
-  })
-  output$summary <- renderPrint({
-    summary(dataset())
-  })
-  output$plot <- renderPlot({
-    plot(dataset())
-  }, res = 96)
+  
 }
-
 shinyApp(ui, server) # Construct and start a shiny application from UI and server
