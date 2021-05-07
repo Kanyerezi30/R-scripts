@@ -193,11 +193,19 @@ library(shiny) # load the shiny package
 # }
 
 ### Working with plots
-ui <- fluidPage(
-  plotOutput("plot", width = "400px")
-)
-server <- function(input, output, session) {
-  output$plot <- renderPlot(plot(1:5), res = 96)
-}
+# ui <- fluidPage(
+#   plotOutput("plot", width = "400px")
+# )
+# server <- function(input, output, session) {
+#   output$plot <- renderPlot(plot(1:5), res = 96)
+# }
 
+### Working with reactivity
+ui <- fluidPage(
+  textOutput("greeting")
+)
+
+server <- function(input, output, session) {
+  output$greeting <- renderText("Hello human!")
+}
 shinyApp(ui, server) # Construct and start a shiny application from UI and server
