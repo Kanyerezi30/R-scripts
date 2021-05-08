@@ -201,11 +201,32 @@ library(shiny) # load the shiny package
 # }
 
 ### Working with reactivity
+# ui <- fluidPage(
+#   textInput("name", "What's your name?"),
+#   textOutput("greeting")
+# )
+# 
+# server <- function(input, output, session) {
+#   output$greeting <- renderText({
+#     paste0("Hello ", input$name, "!")
+#   })
+# }
 ui <- fluidPage(
+  textInput("name", "What's your name?"),
   textOutput("greeting")
 )
 
-server <- function(input, output, session) {
-  output$greeting <- renderText("Hello human!")
+# server <- function(input, output, server) {
+#   output$greeting <- renderText(paste0("Hello ", input$name))
+# }
+
+# server <- function(input, output, server) {
+#   string <- reactive({
+#     paste0("Hello ", input$name)})
+#   output$greeting <- renderText(string())
+# }
+# 
+server <- function(input, output, server) {
+  output$greeting <- renderText(paste0("Hello ", input$name))
 }
 shinyApp(ui, server) # Construct and start a shiny application from UI and server
