@@ -286,4 +286,13 @@ download("injuries.tsv.gz")
 download("population.tsv")
 download("products.tsv")
 
-shinyApp(ui, server) # Construct and start a shiny application from UI and server
+# Read the dataset
+injuries <- vroom::vroom("neiss/injuries.tsv.gz")
+injuries
+
+products <- vroom::vroom("neiss/products.tsv")
+products
+
+population <- vroom::vroom("neiss/population.tsv")
+population
+
