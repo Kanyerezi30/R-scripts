@@ -258,17 +258,32 @@ library(shiny) # load the shiny package
 # }
 
 ### Observer
-ui <- fluidPage(
-  textInput("name", "What's your name?"),
-  textOutput("greeting")
-)
+# ui <- fluidPage(
+#   textInput("name", "What's your name?"),
+#   textOutput("greeting")
+# )
+# 
+# server <- function(input, output, session) {
+#   string <- reactive(paste0("Hello ", input$name, "!"))
+#   
+#   output$greeting <- renderText(string())
+#   observeEvent(input$name, {
+#     message("Greeting performed")
+#   })
+# }
 
-server <- function(input, output, session) {
-  string <- reactive(paste0("Hello ", input$name, "!"))
-  
-  output$greeting <- renderText(string())
-  observeEvent(input$name, {
-    message("Greeting performed")
-  })
+### Case study: ER injuries
+# library(shiny)
+library(vroom)
+library(tidyverse)
+dir.create("neiss")
+#> Warning in dir.create("neiss"): 'neiss' already exists
+download <- function(name) {
+  url <- "https://github.com/hadley/mastering-shiny/raw/master/neiss/"
+  download.file(paste0(url, name), paste0("neiss/", name), quiet = TRUE)
 }
+download("injuries.tsv.gz")
+download("population.tsv")
+download("products.tsv")
+
 shinyApp(ui, server) # Construct and start a shiny application from UI and server
